@@ -8,19 +8,29 @@
 <body>
 
 <?php
+session_start();
+
+    include("connections.php");
+    include("functions.php");
+
+    $user_data = check_login($con);
+
 
 ?>
-<!-- top navigation -->
+
+
 <div class="topnav">
+<!-- left aligned navs --> 
 <a class="active" href="index.php">Home</a>
 <a href="news.php">News</a>
 <a href="contact.php">Contact</a>
 <a href="about.php">About</a>
+
 <!-- right aligned navs -->
-<div class="topnav-right">
+    <div class="topnav-right">
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
-</div>
+    </div>
 </div>
 
 <!-- video 

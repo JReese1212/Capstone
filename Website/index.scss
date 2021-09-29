@@ -31,9 +31,11 @@
     content: "";
     clear: both;
     display: table;
-  }
+}
 
+/*/------------- Top navigation bar -------------/*/
 .topnav {
+    position: relative;
     background-color: #333;
     overflow: hidden;
     margin-bottom: 8px;
@@ -62,7 +64,7 @@
     float: right;
 }
 
-/************** LOGIN PAGE CSS **************/
+/*//------------- LOGIN PAGE CSS -------------//*/
 
 .box {
     padding: 20px;

@@ -9,6 +9,44 @@
 
 <?php
 
+//TODO figure out login page still;
+//time in video 33~
+session_start();
+
+    include("connections.php");
+    include("functions.php");
+
+    if($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        //posted information
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+
+        if(!empty($username) && !empty($pass) && !is_numeric($username)) {
+            //read from database
+            $query = "select * from login where username = $username";
+            
+            $result = mysqli_query($con, $query);
+
+            if($result)
+            {
+                if($result && mysqli_num_rows($result) > 0)
+                {
+                    $userdata = mysqli_fetch_assoc($result);
+
+                    if($userdata['pass'] == $pass)
+                    {
+                        $_SESSION['userid'] = $userdata['userid'];
+                        header("Location: index.php");
+                        die;
+                    }
+                }
+            }
+        }else{
+            echo "Wrong ";
+        }
+
+    }
 ?>
 <!-- top navigation -->
 <div class="topnav">
@@ -28,7 +66,7 @@
 <div class="box">
     <form method="POST">
         <div style="font-size: 24px; margin: 10px;">Login</div>
-        <input class="text" type="text" placeholder="Email" name="email"><br><br>
+        <input class="text" type="email" placeholder="Email" name="email"><br><br>
         <input class="text" type="password" placeholder="Password" name="password"><br><br>
 
         <input id="button" type="submit" value="Login"><br><br>
