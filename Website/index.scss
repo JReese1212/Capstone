@@ -13,33 +13,26 @@
     padding:1.051%;
     background-color:#666;
 }*/
-
-
-.cars {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-
-.carcol {
-    width: 200px;
-    height: 200px;
-    padding: 10px;
-}
-
-.carrow::after {
-    content: "";
-    clear: both;
-    display: table;
+body {
+    background-color: rgb(94, 94, 94);
 }
 
 /*/------------- Top navigation bar -------------/*/
+
 .topnav {
     position: relative;
     background-color: #333;
     overflow: hidden;
     margin-bottom: 8px;
 }
+
+.topnav-centered a {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 .topnav a {
     float: left;
@@ -64,7 +57,74 @@
     float: right;
 }
 
-/*//------------- LOGIN PAGE CSS -------------//*/
+//TODO figure out image in top nav
+/*.topnav img {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    justify-self: left;
+}*/
+
+/*/------------- Index page -------------/*/
+
+.container {
+    position: relative;
+    width: 50%;
+    margin: auto;
+}
+
+.container img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-bottom: 8px;
+}
+
+.container .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.container .btn:hover {
+    background-color: black;
+}
+
+/*/------------- Car images -------------/*/
+.cartext {
+    text-align: center;
+}
+
+.cars {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    background-color: lightgrey;
+}
+
+.carcol {
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+}
+
+.carrow::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/*/------------- LOGIN PAGE CSS -------------/*/
 
 .box {
     padding: 20px;

@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-<meta charset = "utf-8">
-<link type="text/css" rel="stylesheet" href="index.scss">
-<title>Register</title>
-</head>
-<body>
-
 <?php
 session_start();
 
@@ -53,6 +44,8 @@ session_start();
             $encryption_key, $options, $encryption_iv);
             */
             //will need this to submit register info to database
+            //$query =;
+
             $query = "insert into login (userid, username, email, pass)
             values ('$userid', '$username', '$email', '$pass')";
 
@@ -60,6 +53,7 @@ session_start();
 
             header("Location: login.php");
             die;
+
 
         }else
         {
@@ -71,17 +65,40 @@ session_start();
 
 ?>
 
-<!-- top navigation -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset = "utf-8">
+<link type="text/css" rel="stylesheet" href="index.scss">
+<title>Register</title>
+</head>
+<body>
+
+
 <div class="topnav">
+
+<!-- Centered link -->
+<div class="topnav-centered">
+<a href="highscores.php">High Scores</a>
+</div>
+<!-- left aligned navs --> 
 <a href="index.php">Home</a>
 <a href="news.php">News</a>
-<a href="contact.php">Contact</a>
-<a href="about.php">About</a>
+<a href="contact.php">Contact Us</a>
+
 <!-- right aligned navs -->
-<div class="topnav-right">
-    <a href="login.php">Login</a>
-    <a class="active" href="register.php">Register</a>
-</div>
+    <div class="topnav-right">
+    <?php
+    if(isset($_SESSION['userid']))
+    {
+        echo "<a href='logout.php'>Logout</a>";
+    }else{
+        echo "<a href='login.php'>Login</a>
+        <a class='active' href='register.php'>Register</a>";
+    }
+    ?>
+    </div>
 </div>
 
 <div class="box">
@@ -96,6 +113,7 @@ session_start();
         title="Must contain at least one number and one letter, and at least 8 or more characters" required><br><br>
 
         <input id="button" type="submit" value="Register"><br><br>
+        <div>Already registered? <a id="reg" href="login.php">Click here to Log in</a></div><br><br>
     </form>
 </div>
 
