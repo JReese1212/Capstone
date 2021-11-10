@@ -17,7 +17,7 @@ body {
     background-color: rgb(94, 94, 94);
 }
 
-/*/------------- Top navigation bar -------------/*/
+/*/------------- TOP NAV BAR -------------/*/
 
 .topnav {
     position: relative;
@@ -65,7 +65,7 @@ body {
     justify-self: left;
 }*/
 
-/*/------------- Index page -------------/*/
+/*/------------- INDEX PAGE -------------/*/
 
 .container {
     position: relative;
@@ -100,7 +100,7 @@ body {
     background-color: black;
 }
 
-/*/------------- Car images -------------/*/
+/*/------------- CAR IMAGES -------------/*/
 .cartext {
     text-align: center;
 }
@@ -128,11 +128,12 @@ body {
 
 .box {
     padding: 20px;
-    width: 300px;
+    width: 50%;
     color:white;
     background-color: grey;
     margin: auto;
     text-align: center;
+    border-radius: 25px;
 }
 
 .text {
@@ -148,4 +149,67 @@ body {
     color: black;
     background-color: white;
     border: none;
+}
+
+
+/*/------------- NEWS PAGE CSS -------------/*/
+
+.news {
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    background-color: grey;
+    color: white;
+    border-radius: 25px;
+}
+
+h2 {
+    text-align: center;
+    color:white;
+}
+
+h3 {
+    text-align: center;
+    color:white;
+}
+
+/*/------------- CONTACT US PAGE CSS -------------/*/
+
+.contact {
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    background-color: grey;
+    color: white;
+    border-radius: 25px;
+}
+
+/*/------------- HIGH SCORES -------------/*/
+.highscore {
+    padding: 20px;
+    width: 33%;
+    color:white;
+    background-color: grey;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.table {
+    border:rgb(94, 94, 94);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table{
+    text-align:center;
+    border: 1px solid white;
+    margin: auto;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
 }

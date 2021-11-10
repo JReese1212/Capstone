@@ -16,38 +16,69 @@ session_start();
         $username = mysqli_real_escape_string($con, $username);
         $pass = mysqli_real_escape_string($con, $pass);
 
+        if($stmt = $con->prepare('SELECT email FROM login WHERE email = ?'))
+        {
+            $stmt->bind_param('s', $_POST['email']);
+            $stmt->execute();
+            $stmt->store_result();
+            if($stmt->num_rows > 0)
+            {
+                echo "<script>alert('Email already exists! Please enter a different email')</script>";
+            }
+            else
+            {
+                $stmt = $con->prepare('INSERT INTO login (userid, username, email, pass)
+                values (?, ?, ?, ?)');
+                $userid = randomNumber(10);  //hash for password
+                $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
+                $stmt->bind_param('isss', $userid, $_POST['username'], $_POST['email'], $hashed_pass);
+                $stmt->execute();
+
+                header("Location: login.php");
+                die();
+            }
+        }else
+        {
+            echo "Please try again!";
+        }
+
+    }
+
+
+?>
+
+
+<!--<php
+
+====OLD PHP====
+
+session_start();
+
+    include("connections.php");
+    include("functions.php");
+
+    if($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        //posted information
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+
+        $username = stripslashes($username);
+        $pass = stripslashes($pass);
+        $username = mysqli_real_escape_string($con, $username);
+        $pass = mysqli_real_escape_string($con, $pass);
+
         if(!empty($username) && !empty($pass) && 
         !empty($email) && !is_numeric($username))
         {
             //save to database
             $userid = randomNumber(10);  //hash for password
 
-            /* QUESTIONABLE
-            $hash = hash('md5', $pass);
-            // Store the cipher method
-            $ciphering = "AES-128-CTR";
-    
-            // Use OpenSSl Encryption method
-            $iv_length = openssl_cipher_iv_length($ciphering);
-            $options = 0;
-            
-            // Non-NULL Initialization Vector for encryption
-            $encryption_iv = random_bytes($iv_length);
-            
-            // Store the encryption key
-
-            $hash = hash('md5', $pass);
-            $encryption_key = $hash;
-            
-            // Use openssl_encrypt() function to encrypt the data
-            $encryption = openssl_encrypt($pass, $ciphering,
-            $encryption_key, $options, $encryption_iv);
-            */
-            //will need this to submit register info to database
-            //$query =;
+            $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
 
             $query = "insert into login (userid, username, email, pass)
-            values ('$userid', '$username', '$email', '$pass')";
+            values ('$userid', '$username', '$email', '$hashed_pass')";
 
             mysqli_query($con, $query);
 
@@ -63,8 +94,7 @@ session_start();
     }
 
 
-?>
-
+?>-->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

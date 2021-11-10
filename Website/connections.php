@@ -5,4 +5,7 @@ $dbuser = "root";
 $dbpass = "";
 $dbname = "car_survivor_game";
 
-$con = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+$con = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+if(mysqli_connect_errno()) {
+    die("Connection failed: " .mysqli_connect_error());
+}

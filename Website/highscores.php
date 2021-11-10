@@ -43,7 +43,57 @@ session_start();
     </div>
 </div>
 
+<h2>High Scores</h2>
 
+<div class = "highscore">
+<div class="table">
+<?php
+$sql = "SELECT username, highscore from highscore order by highscore DESC";
+$result = $con->query($sql);
+
+echo "<table>";
+echo"<th></th>";
+echo"<th>Username</th>";
+echo"<th>Score</th>";
+$i = 1;
+if(mysqli_num_rows($result) > 0)
+{
+    while($row = $result->fetch_assoc()) {
+    echo "<tr><td>" . $i . "</td>";
+    echo "<td>" .$row['username'] ."</td><td>" .$row['highscore'] . "</td></tr>";
+    ++$i;
+    }
+    
+}
+
+echo "</table>";
+
+?>
+</div>
+</div>
+
+<!--
+<div class = "highscore">
+<div class="table">
+
+PHP STARTS
+
+$query = "SELECT username, highscore from highscore order by highscore DESC";
+$result = mysqli_query($con, $query);
+
+echo "<table>";
+echo"<th>Username</th>";
+echo"<th>Score</th>";
+while($row = mysqli_fetch_array($result)) {
+    echo "<tr><td>" .$row['username'] ."</td><td>" .$row['highscore'] . "</td></tr>";
+}
+echo "</table>"
+
+PHP ENDS
+
+</div>
+</div>
+
+-->
 </body>
-
 </html>

@@ -1,4 +1,44 @@
 <?php
+session_start();
+
+    include("connections.php");
+    include("functions.php");
+
+    if($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+        //posted information
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];
+
+        //prepare the statment
+        $stmt = $con->prepare('SELECT * FROM login WHERE email = ?');
+        //bind the email to the parameter in line above
+        $stmt->bind_param('s', $_POST['email']);
+        $stmt->execute();
+        //get results
+        $result = $stmt->get_result();
+        //fetch results and store them in userdata variable 
+        $userdata = $result->fetch_assoc();
+
+        //if there is a result and only 1
+        if($result && $result->num_rows > 0)
+        {
+            //verify password matches
+            if(password_verify($pass, $userdata['pass']))
+            {
+                //set the userid to the current session userid
+                $_SESSION['userid'] = $userdata['userid'];
+                header("Location: index.php");
+                die;
+            }
+        }
+        echo "<script>alert('Invalid Email or Password!')</script>";
+    }
+?>
+
+<!--<php
+
+=====OLD PHP====
 
 session_start();
 
@@ -38,7 +78,7 @@ session_start();
         }
 
     }
-?>
+?>-->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
