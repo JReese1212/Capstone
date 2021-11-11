@@ -14,6 +14,13 @@ namespace CSG_API.Models
 
         }
 
-        public DbSet<User> user { get; set; }
+        public DbSet<Login> login { get; set; }
+        public DbSet<Scores> scores { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Login>()
+                .HasAlternateKey(l => l.email);
+        }
     }
 }

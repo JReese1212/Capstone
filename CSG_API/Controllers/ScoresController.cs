@@ -11,41 +11,41 @@ namespace CSG_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class ScoresController : ControllerBase
     {
         private readonly CarContext _context;
 
-        public UsersController(CarContext context)
+        public ScoresController(CarContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Scores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Getuser()
+        public async Task<ActionResult<IEnumerable<Scores>>> Getscores()
         {
-            return await _context.user.ToListAsync();
+            return await _context.scores.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Scores/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Scores>> GetScores(int id)
         {
-            var user = await _context.user.FindAsync(id);
+            var scores = await _context.scores.FindAsync(id);
 
-            if (user == null)
+            if (scores == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return scores;
         }
 
         // GET: api/Users/Bob
         [HttpGet("name/{id}")]
-        public async Task<ActionResult<User>> GetUserByName(string id)
+        public async Task<ActionResult<Scores>> GetUserByName(string id)
         {
-            var user = await _context.user.Where(b => b.name == id).FirstOrDefaultAsync();
+            var user = await _context.scores.Where(b => b.username == id).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -55,18 +55,18 @@ namespace CSG_API.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Scores/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutScores(int id, Scores scores)
         {
-            if (id != user.Id)
+            if (id != scores.userid)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(scores).State = EntityState.Modified;
 
             try
             {
@@ -74,7 +74,7 @@ namespace CSG_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!ScoresExists(id))
                 {
                     return NotFound();
                 }
@@ -87,37 +87,37 @@ namespace CSG_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Scores
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Scores>> PostScores(Scores scores)
         {
-            _context.user.Add(user);
+            _context.scores.Add(scores);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return CreatedAtAction("GetScores", new { id = scores.userid }, scores);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Scores/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Scores>> DeleteScores(int id)
         {
-            var user = await _context.user.FindAsync(id);
-            if (user == null)
+            var scores = await _context.scores.FindAsync(id);
+            if (scores == null)
             {
                 return NotFound();
             }
 
-            _context.user.Remove(user);
+            _context.scores.Remove(scores);
             await _context.SaveChangesAsync();
 
-            return user;
+            return scores;
         }
 
-        private bool UserExists(int id)
+        private bool ScoresExists(int id)
         {
-            return _context.user.Any(e => e.Id == id);
+            return _context.scores.Any(e => e.userid == id);
         }
     }
 }
