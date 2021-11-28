@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5db65cd683863144ab897a9f32c4fd3, type: 3}
+  m_Name: TileData
+  m_EditorClassIdentifier: 
+  W0:
+  - {fileID: 3839641362827147277, guid: 193ba31208de7194bbaad8497c166796, type: 3}
+  FILL0:
+  - {fileID: 8257449041731917048, guid: 02e6bb617946f094ebba02e34e06d9c8, type: 3}
+  RE0: []
+  RI0:
+  - {fileID: 4394107376781035822, guid: 6dce9396cfefb0c4c813c6f04d709db7, type: 3}
+  RW0:
+  - {fileID: 3544395910808682987, guid: 415a5dbc0578cc4468ebc4c46c5b49a6, type: 3}
+  RL0:
+  - {fileID: 6341912863880031480, guid: 9395e0e83e99b2a46af470b70e211539, type: 3}
+  RT0:
+  - {fileID: 5467849844089117064, guid: 8a55ee6113b773d48958eed16cd8d49a, type: 3}
+  RX0:
+  - {fileID: 511869911138028045, guid: a544b82631c9ba641be7c9d5b32e4d6e, type: 3}
+  W1:
+  - {fileID: 5652356898592444904, guid: 2e73c889e26049f44b0663da2e6f2af8, type: 3}
+  FILL1:
+  - {fileID: 4147157220020225413, guid: c6cbcef3d87c14d468b4770a231d80fd, type: 3}
+  RE1: []
+  RI1:
+  - {fileID: 7208623453748045859, guid: f5231ea0086010c4b8fa802317a82b4d, type: 3}
+  RW1:
+  - {fileID: 970393491298965973, guid: 6061bc71f3573fb41a95fa7c6daeff56, type: 3}
+  RL1:
+  - {fileID: 7492467376575713169, guid: f0843367fe132ff4986bf14b1b24d652, type: 3}
+  RT1:
+  - {fileID: 4454961580112224205, guid: 48613a8a3863c9c4a99509b58a161d3e, type: 3}
+  RX1:
+  - {fileID: 2681036688297870299, guid: 473b42c394f3884418343ea97d6888f7, type: 3}
+  W2:
+  - {fileID: 7778147667284339573, guid: 48c6374b0363fc84c82100d415fae472, type: 3}
+  FILL2:
+  - {fileID: 4739293781859970218, guid: 7e2654c000b4e7947baa09e538bba675, type: 3}
+  RE2: []
+  RI2:
+  - {fileID: 3153904989406629445, guid: 002021c4c51167340870ee524f928b66, type: 3}
+  RW2:
+  - {fileID: 4249707298252029124, guid: 93c52803edb96a141a889347c9a313ef, type: 3}
+  RL2:
+  - {fileID: 8885152770418578114, guid: 0646860e1485d78489331a30b390d323, type: 3}
+  RT2:
+  - {fileID: 1850416317928339500, guid: 5215429e1371372478ec17d82489999f, type: 3}
+  RX2:
+  - {fileID: 7673296119691685300, guid: a40c6f3b1b6413f499e6498b90a96630, type: 3}

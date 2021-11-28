@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87dc3b16e4b45a345b23d6b60aca6e42, type: 3}
+  m_Name: Residential Data
+  m_EditorClassIdentifier: 
+  Heights: 0100000002000000
+  Materials:
+  - {fileID: 2100000, guid: b938dfce2bc0b904da61738dcca25980, type: 2}
+  - {fileID: 2100000, guid: 5eaee2f77be05e5429c7c755ed64a85b, type: 2}
+  - {fileID: 2100000, guid: 9051dc877d883ea498e0e648b59d79a3, type: 2}
+  - {fileID: 2100000, guid: bdfeb9b2f79c3dd4e91d303d0f565f98, type: 2}
+  - {fileID: 2100000, guid: 06a21075c94a55942a2f65f5695f4bbd, type: 2}
+  - {fileID: 2100000, guid: 041a2da626facb44daacf93fbf413f2f, type: 2}

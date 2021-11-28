@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WorldHandler : MonoBehaviour
+{
+    [SerializeField] private TileDataSO TileList;
+    [SerializeField] private WorldGenerator MyWorld;
+    [SerializeField] private List<GameObject> MyCar;
+
+    // random
+    [SerializeField] private bool RandomSeed = false;
+    [Range(-100000, 100000)] [SerializeField] public int MasterSeed;
+    void Start()
+    {
+        SetSeed();
+        MyWorld = new WorldGenerator(TileList);
+        Instantiate(MyCar[0], new Vector3(50, 1, 50), Quaternion.Euler(0, 0, 0));
+    }
+
+    ~WorldHandler()
+    {
+        MyWorld.DestroyWorld();
+        for (int i = 0; i < MyCar.Count; i++)
+        {
+            Destroy(MyCar[i]);
+        }
+
+    }
+
+    void FixedUpdate()
+    {
+        
+    }
+
+    private void SetSeed()
+    {
+        if (RandomSeed)
+        {
+            Random.InitState((int)System.DateTime.Now.Ticks);
+        }
+        else
+        {
+            Random.InitState(MasterSeed);
+        }
+    }
+}

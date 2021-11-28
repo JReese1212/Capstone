@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87dc3b16e4b45a345b23d6b60aca6e42, type: 3}
+  m_Name: Downtown
+  m_EditorClassIdentifier: 
+  Heights: 02000000020000000600000007000000090000000c000000
+  Materials:
+  - {fileID: 2100000, guid: 27f84b59af81a8c45b291eb79deed38c, type: 2}
+  - {fileID: 2100000, guid: 94dac693b2c19384d8c09668a028730a, type: 2}
+  - {fileID: 2100000, guid: 8b6a63af899228746ae297838551f311, type: 2}
+  - {fileID: 2100000, guid: 041a2da626facb44daacf93fbf413f2f, type: 2}
