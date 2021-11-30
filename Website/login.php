@@ -3,6 +3,7 @@ session_start();
 
     include("connections.php");
     include("functions.php");
+    include("apiFunc.php");
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
@@ -10,24 +11,29 @@ session_start();
         $email = $_POST['email'];
         $pass = $_POST['pass'];
 
-        //prepare the statment
-        $stmt = $con->prepare('SELECT * FROM login WHERE email = ?');
-        //bind the email to the parameter in line above
-        $stmt->bind_param('s', $_POST['email']);
-        $stmt->execute();
-        //get results
-        $result = $stmt->get_result();
-        //fetch results and store them in userdata variable 
-        $userdata = $result->fetch_assoc();
+        // USING API
+        $get_data = callAPI('GET', 'http://3.22.125.44:8000/api/Logins/email/' . $email, false);
+        $response = json_decode($get_data, true);
 
-        //if there is a result and only 1
-        if($result && $result->num_rows > 0)
+
+        // prepare the statment
+//        $stmt = $con->prepare('SELECT * FROM login WHERE email = ?');
+        // bind the email to the parameter in line above
+//        $stmt->bind_param('s', $_POST['email']);
+//        $stmt->execute();
+        // get results
+//        $result = $stmt->get_result();
+        // fetch results and store them in userdata variable
+//        $userdata = $result->fetch_assoc();
+
+        // if there is a result and only 1
+        if(count($response) == 4)
         {
-            //verify password matches
-            if(password_verify($pass, $userdata['pass']))
+            // verify password matches
+            if(password_verify($pass, $response[pass]))
             {
-                //set the userid to the current session userid
-                $_SESSION['userid'] = $userdata['userid'];
+                // set the userid to the current session userid
+                $_SESSION['userid'] = $response[userid];
                 header("Location: index.php");
                 die;
             }
@@ -95,7 +101,7 @@ session_start();
 <div class="topnav-centered">
 <a href="highscores.php">High Scores</a>
 </div>
-<!-- left aligned navs --> 
+<!-- left aligned navs -->
 <a href="index.php">Home</a>
 <a href="news.php">News</a>
 <a href="contact.php">Contact Us</a>

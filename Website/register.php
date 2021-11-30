@@ -3,6 +3,7 @@ session_start();
 
     include("connections.php");
     include("functions.php");
+    include("apiFunc.php");
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
@@ -13,88 +14,47 @@ session_start();
 
         $username = stripslashes($username);
         $pass = stripslashes($pass);
-        $username = mysqli_real_escape_string($con, $username);
-        $pass = mysqli_real_escape_string($con, $pass);
 
-        if($stmt = $con->prepare('SELECT email FROM login WHERE email = ?'))
-        {
-            $stmt->bind_param('s', $_POST['email']);
-            $stmt->execute();
-            $stmt->store_result();
-            if($stmt->num_rows > 0)
-            {
+        $get_data = callAPI('GET', 'http://3.22.125.44:8000/api/Logins/email/' . $email, false);
+        $response = json_decode($get_data, true);
+        $get_data = $response[email];
+
+        if($get_data == $email){
                 echo "<script>alert('Email already exists! Please enter a different email')</script>";
-            }
-            else
-            {
-                $stmt = $con->prepare('INSERT INTO login (userid, username, email, pass)
-                values (?, ?, ?, ?)');
-                $userid = randomNumber(10);  //hash for password
+        }
+        else {
+                $userid = randomNumber(10);
                 $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
-                $stmt->bind_param('isss', $userid, $_POST['username'], $_POST['email'], $hashed_pass);
-                $stmt->execute();
+                $data = array(
+                        "userid" => $userid,
+                        "username" => $username,
+                        "email" => $email,
+                        "pass" => $hashed_pass
+                );
+                $post_data = callAPI('POST', 'http://3.22.125.44:8000/api/Logins', json_encode($data));
+
+                $ScoreData = array (
+                        "userid" => $userid,
+                        "highscore" => 0,
+                        "username" =>$username,
+                        "score2" => 0,
+                        "score3" => 0,
+                        "score4" => 0,
+                        "score5" => 0,
+                        "score6" => 0,
+                        "score7" => 0,
+                        "score8" => 0,
+                        "score9" => 0,
+                        "score10" => 0
+                );
+
+                $post_scoreData = callAPI('POST', 'http://3.22.125.44:8000/api/Scores', json_encode($ScoreData));
 
                 header("Location: login.php");
                 die();
-            }
-        }else
-        {
-            echo "Please try again!";
         }
-
     }
-
-
 ?>
-
-
-<!--<php
-
-====OLD PHP====
-
-session_start();
-
-    include("connections.php");
-    include("functions.php");
-
-    if($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        //posted information
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $pass = $_POST['pass'];
-
-        $username = stripslashes($username);
-        $pass = stripslashes($pass);
-        $username = mysqli_real_escape_string($con, $username);
-        $pass = mysqli_real_escape_string($con, $pass);
-
-        if(!empty($username) && !empty($pass) && 
-        !empty($email) && !is_numeric($username))
-        {
-            //save to database
-            $userid = randomNumber(10);  //hash for password
-
-            $hashed_pass = password_hash($pass, PASSWORD_BCRYPT);
-
-            $query = "insert into login (userid, username, email, pass)
-            values ('$userid', '$username', '$email', '$hashed_pass')";
-
-            mysqli_query($con, $query);
-
-            header("Location: login.php");
-            die;
-
-
-        }else
-        {
-            echo "Please enter some valid information!";
-        }
-
-    }
-
-
-?>-->
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -112,13 +72,13 @@ session_start();
 <div class="topnav-centered">
 <a href="highscores.php">High Scores</a>
 </div>
-<!-- left aligned navs --> 
+<!-- left aligned navs -->
 <a href="index.php">Home</a>
 <a href="news.php">News</a>
 <a href="contact.php">Contact Us</a>
 
 <!-- right aligned navs -->
-    <div class="topnav-right">
+<div class="topnav-right">
     <?php
     if(isset($_SESSION['userid']))
     {

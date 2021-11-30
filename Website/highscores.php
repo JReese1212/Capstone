@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-    include("connections.php");
+    //include("connections.php");
     include("functions.php");
+    include("apiFunc.php");
 
     $userdata = check_login($con);
 
@@ -20,12 +21,9 @@ session_start();
 
 
 <div class="topnav">
-<!-- Centered link -->
-<div class="topnav-centered">
-<a class="active" href="highscores.php">High Scores</a>
-</div>
-<!-- left aligned navs --> 
+<!-- left aligned navs -->
 <a href="index.php">Home</a>
+<a class="active" href="highscores.php">Scores</a>
 <a href="news.php">News</a>
 <a href="contact.php">Contact Us</a>
 
@@ -43,57 +41,50 @@ session_start();
     </div>
 </div>
 
-<h2>High Scores</h2>
+<h2>Scores</h2>
 
 <div class = "highscore">
 <div class="table">
 <?php
-$sql = "SELECT username, highscore from highscore order by highscore DESC";
-$result = $con->query($sql);
+
+$get_data = callAPI('GET', 'http://3.22.125.44:8000/api/Scores/', false);
+$response = json_decode($get_data, true);
+
 
 echo "<table>";
-echo"<th></th>";
+echo"<th>Rankings</th>";
 echo"<th>Username</th>";
 echo"<th>Score</th>";
 $i = 1;
-if(mysqli_num_rows($result) > 0)
+
+if(count($response) > 0)
 {
-    while($row = $result->fetch_assoc()) {
-    echo "<tr><td>" . $i . "</td>";
-    echo "<td>" .$row['username'] ."</td><td>" .$row['highscore'] . "</td></tr>";
-    ++$i;
+        $columns = array_column($response, 'highscore');
+        array_multisort($columns, SORT_DESC, $response);
+
+
+    for($x = 0; $x < count($response); $x++)
+    {
+            if($response[$x][highscore] > 0){
+                    echo "<tr><td>" . $i . "</td>";
+                    echo "<td>" . $response[$x][username] . "</td><td>" . $response[$x][highscore] . "</td></tr>";
+            }
+        ++$i;
     }
-    
 }
+
 
 echo "</table>";
 
 ?>
 </div>
+</div><br>
+
+
+
+<div class="scoresbox">
+    <a href="personalScores.php">Check your scores!</a>
 </div>
 
-<!--
-<div class = "highscore">
-<div class="table">
-
-PHP STARTS
-
-$query = "SELECT username, highscore from highscore order by highscore DESC";
-$result = mysqli_query($con, $query);
-
-echo "<table>";
-echo"<th>Username</th>";
-echo"<th>Score</th>";
-while($row = mysqli_fetch_array($result)) {
-    echo "<tr><td>" .$row['username'] ."</td><td>" .$row['highscore'] . "</td></tr>";
-}
-echo "</table>"
-
-PHP ENDS
-
-</div>
-</div>
-
--->
 </body>
 </html>
